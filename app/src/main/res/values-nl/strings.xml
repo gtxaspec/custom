@@ -1,6 +1,6 @@
 <resources>
     <!-- Buttons and general layout -->
-    <string name="app_name">custom</string>
+    <string name="app_name" translatable="false">custom</string>
     <string name="Reboot_to_TWRP">Reboot in TWRP</string>
     <string name="Reboot_to_Install_GTX_Stock">Reboot om GTX_Stock te installeren</string>
     <string name="Restore_Stock">Restore Stock</string>
