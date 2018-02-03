@@ -109,21 +109,21 @@ public class MainActivity extends AppCompatActivity {
         button1.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
                 //tv.setText("Output :"+"\n"+runAsRoot());
-                tv2.setText("Verify current user!");
-                tv.setText("Console Output :" + "\n" + sudoForResult("whoami"));
+                tv2.setText(R.string.Verify_current_user);
+                tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("whoami"));
             }
         });
 
         //install custom recovery
         button2.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
-                tv2.setText("Verifying bundled recovery file integrity...");
+                tv2.setText(R.string.Verifying_bundled_recovery_file_integrity);
                 copyFileOrDir("install.sh");
                 copyFileOrDir("p10_stock_rec.img");
                 copyFileOrDir("recovery_new_keys.img");
                 sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/install.sh");
-                tv2.setText("Installing Custom Recovery...");
-                tv.setText("Console Output :" + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/install.sh"));
+                tv2.setText(R.string.Installing_Custom_Recovery);
+                tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/install.sh"));
 
             }
         });
@@ -131,13 +131,13 @@ public class MainActivity extends AppCompatActivity {
         //restore stock recovery
         button3.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
-                tv2.setText("Verifying bundled recovery file integrity...");
+                tv2.setText("@string/Verifying_bundled_recovery_file_integrity");
                 copyFileOrDir("restore.sh");
                 copyFileOrDir("p10_stock_rec.img");
                 copyFileOrDir("recovery_new_keys.img");
                 sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/restore.sh");
-                tv2.setText("Restoring stock recovery...");
-                tv.setText("Console Output :" + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/restore.sh"));
+                tv2.setText(R.string.Restoring_stock_recovery);
+                tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/restore.sh"));
             }
         });
 
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
                 copyFileOrDir("5009_rec_signed.zip");
                 copyFileOrDir("openrecoveryscript_stock");
                 sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/reboot_stock.sh");
-                tv.setText("Console Output :" + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/reboot_stock.sh"));
+                tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/reboot_stock.sh"));
             }
         });
 
@@ -156,9 +156,9 @@ public class MainActivity extends AppCompatActivity {
         button5.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
                 copyFileOrDir("verify.sh");;
-                tv2.setText("Verifying currently installed recovery...");
+                tv2.setText(R.string.Verifying_currently_installed_recovery);
                 sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/verify.sh");
-                tv.setText("Console Output :" + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/verify.sh"));
+                tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/verify.sh"));
             }
         });
 
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                 copyFileOrDir("5009_rec_signed.zip");
                 copyFileOrDir("openrecoveryscript_custom");
                 sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/reboot_custom.sh");
-                tv.setText("Console Output :" + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/reboot_custom.sh"));
+                tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/reboot_custom.sh"));
             }
         });
 
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
                 copyFileOrDir("reboot_twrp.sh");
                 copyFileOrDir("5009_rec_signed.zip");
                 sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/reboot_twrp.sh");
-                tv.setText("Console Output :" + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/reboot_twrp.sh"));
+                tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/reboot_twrp.sh"));
             }
         });
 
