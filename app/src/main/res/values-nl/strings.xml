@@ -8,7 +8,7 @@
     <string name="Install_Custom">Installeer Custom</string>
     <string name="Verify_Recovery">Recovery verifieren</string>
     <string name="Console_Output">Console Uitvoer</string>
-    <string name="custom_Recovery_Maintenance">custom Recovery Onderhoud</string>
+    <string name="custom_Recovery_Maintenance">custom Recovery Tool</string>
     <string name="Exit_without_Changes">Exit zonder wijzigingen</string>
     <string name="ROM_Utilities">ROM Utilities</string>
     <string name="Waiting_for_user_action">Wacht op gebruiker acties...</string>
