@@ -5,11 +5,11 @@
     <string name="Reboot_to_Install_GTX_Stock">Reboot to Install GTX_Stock</string>
     <string name="Restore_Stock">Restore Stock</string>
     <string name="Reboot_to_Install_lbdroid_Custom">Reboot to Install lbdroid Custom</string>
-    <string name="Install_Custom">Install_Custom</string>
+    <string name="Install_Custom">Install Custom</string>
     <string name="Verify_Recovery">Verify Recovery</string>
     <string name="Console_Output">Console Output</string>
     <string name="custom_Recovery_Maintenance">custom Recovery Maintenance</string>
-    <string name="Exit_without_Changes">custom Recovery Maintenance</string>
+    <string name="Exit_without_Changes">Exit without Changes</string>
     <string name="ROM_Utilities">ROM Utilities</string>
     <string name="Waiting_for_user_action">Waiting for user action...</string>
 
