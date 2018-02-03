@@ -1,0 +1,23 @@
+<resources>
+    <!-- Buttons and general layout -->
+    <string name="app_name" translatable="false">custom</string>
+    <string name="Reboot_to_TWRP">Reboot in TWRP</string>
+    <string name="Reboot_to_Install_GTX_Stock">Reboot om GTX_Stock te installeren</string>
+    <string name="Restore_Stock">Restore Stock</string>
+    <string name="Reboot_to_Install_lbdroid_Custom">Reboot om lbdroid Custom te installeren</string>
+    <string name="Install_Custom">Installeer Custom</string>
+    <string name="Verify_Recovery">Recovery verifieren</string>
+    <string name="Console_Output">Console Uitvoer</string>
+    <string name="custom_Recovery_Maintenance">custom Recovery Tool</string>
+    <string name="Exit_without_Changes">Exit zonder wijzigingen</string>
+    <string name="ROM_Utilities">ROM Utilities</string>
+    <string name="Waiting_for_user_action">Wacht op gebruiker acties...</string>
+
+    <!-- application messages-->
+    <string name="Verify_current_user">Verifieer huidige gebruiker!</string>
+    <string name="gen_message_Console_Output">Console Uitvoer :</string>
+    <string name="Verifying_bundled_recovery_file_integrity">Verifieer recovery bestand integriteit...</string>
+    <string name="Installing_Custom_Recovery">Installeren van Custom Recovery...</string>
+    <string name="Restoring_stock_recovery">Herstellen van stock recovery...</string>
+    <string name="Verifying_currently_installed_recovery">Verifieren huidige geinstalleerde recovery...</string>
+</resources>
