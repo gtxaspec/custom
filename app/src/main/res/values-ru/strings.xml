@@ -1,23 +1,23 @@
 <resources>
-    <!-- Buttons and general layout -->
+    <!-- Buttons and General Layout -->
     <string name="app_name" translatable="false">custom</string>
-    <string name="Reboot_to_TWRP">Reboot to TWRP</string>
-    <string name="Reboot_to_Install_GTX_Stock">Reboot to Install GTX_Stock</string>
-    <string name="Restore_Stock">Restore Stock</string>
-    <string name="Reboot_to_Install_lbdroid_Custom">Reboot to Install lbdroid Custom</string>
-    <string name="Install_Custom">Install Custom</string>
-    <string name="Verify_Recovery">Verify Recovery</string>
-    <string name="Console_Output">Console Output</string>
-    <string name="custom_Recovery_Maintenance">custom Recovery Maintenance</string>
-    <string name="Exit_without_Changes">Exit without Changes</string>
-    <string name="ROM_Utilities">ROM Utilities</string>
-    <string name="Waiting_for_user_action">Waiting for user action...</string>
+    <string name="Reboot_to_TWRP">Перезагрузить в TWRP</string>
+    <string name="Reboot_to_Install_GTX_Stock">Установить GTX</string>
+    <string name="Restore_Stock">Восстановить рекавери</string>
+    <string name="Reboot_to_Install_lbdroid_Custom">Установить lbdroid</string>
+    <string name="Install_Custom">Установить TWRP</string>
+    <string name="Verify_Recovery">Проверить рекавери</string>
+    <string name="Console_Output">Сообщения консоли</string>
+    <string name="custom_Recovery_Maintenance">Ассистент по работе с рекавери</string>
+    <string name="Exit_without_Changes">Выйти без изменений</string>
+    <string name="ROM_Utilities">Утилиты</string>
+    <string name="Waiting_for_user_action">Ожидание выбора пользователя...</string>
 
-    <!-- application messages-->
-    <string name="Verify_current_user">Verify current user!</string>
-    <string name="gen_message_Console_Output">Console Output :</string>
-    <string name="Verifying_bundled_recovery_file_integrity">Verifying bundled recovery file integrity...</string>
-    <string name="Installing_Custom_Recovery">Installing Custom Recovery...</string>
-    <string name="Restoring_stock_recovery">Restoring stock recovery...</string>
-    <string name="Verifying_currently_installed_recovery">Verifying currently installed recovery...</string>
+    <!-- Application Messages -->
+    <string name="Verify_current_user">Проверка текущего пользователя!</string>
+    <string name="gen_message_Console_Output">Сообщения консоли:</string>
+    <string name="Verifying_bundled_recovery_file_integrity">Проверка целостности файла рекавери...</string>
+    <string name="Installing_Custom_Recovery">Установка TWRP...</string>
+    <string name="Restoring_stock_recovery">Восстановление оригинального рекавери...</string>
+    <string name="Verifying_currently_installed_recovery">Проверка текущего установленого рекавери...</string>
 </resources>
