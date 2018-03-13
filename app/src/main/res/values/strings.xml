@@ -2,9 +2,9 @@
     <!-- Buttons and general layout -->
     <string name="app_name" translatable="false">custom</string>
     <string name="Reboot_to_TWRP">Reboot to TWRP</string>
-    <string name="Reboot_to_Install_GTX_Stock">Reboot to Install GTX_Stock</string>
+    <string name="Reboot_to_Install_GTX_Stock">Install GTX ROM</string>
     <string name="Restore_Stock">Restore Stock</string>
-    <string name="Reboot_to_Install_lbdroid_Custom">Reboot to Install lbdroid Custom</string>
+    <string name="Reboot_to_Install_lbdroid_Custom">Install lbdroid ROM</string>
     <string name="Install_Custom">Install Custom</string>
     <string name="Verify_Recovery">Verify Recovery</string>
     <string name="Console_Output">Console Output</string>

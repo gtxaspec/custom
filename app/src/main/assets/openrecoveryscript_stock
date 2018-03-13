@@ -1,15 +1,15 @@
 cmd /sbin/busybox sh /color.sh &
 print gtx_stock_ROM
-install /usbotg/5009_60_gtx.zip
+install /mnt/usb_storage/5009_60_gtx.zip
 print Done!
 print installing dalvik-cache
-install /usbotg/data.zip
+install /mnt/usb_storage/data.zip
 print Done!
 print Installing Google Apps...
-install /usbotg/open_gapps-x86-6.0.zip
+install /mnt/usb_storage/open_gapps-x86-6.0.zip
 print Done! Post processing...
 cmd /sbin/busybox sh /red.sh &
-print Rebooting to SYSTEM...
 print Please remove INSTALLATION MEDIA...
 print REBOOTING IN 15 SECONDS...
 cmd /sbin/busybox sleep 15
+print Rebooting to SYSTEM...

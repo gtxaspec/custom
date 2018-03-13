@@ -1,10 +1,14 @@
 package com.gtx.jy.custom;
 
+import android.os.Message;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
         import android.os.Handler;
         import java.io.*;
-        import android.widget.*;
+
+import android.view.Window;
+import android.widget.*;
         import static java.lang.Runtime.getRuntime;
         import android.view.View;
         import android.widget.Button;
@@ -14,185 +18,140 @@ import android.support.v7.app.AppCompatActivity;
         import java.io.IOException;
         import java.io.InputStream;
         import android.content.Context;
-
+        import java.util.Timer;
+        import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView tv, tv2;
-
     Button button1, button2, button3, button4, button5, button6, button7, button8;
-
+    Handler handler;
+    Timer timer=new Timer();//Used for a delay to provide user feedback
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         super.onCreate(savedInstanceState);
-
-        //delete stale files on app launch
-        File file0 = new File("/data/data/com.gtx.jy.custom/install.sh");
-        File file1 = new File("/data/data/com.gtx.jy.custom/restore.sh");
-        File file2 = new File("/data/data/com.gtx.jy.custom/5009_rec_signed.zip");
-        File file3 = new File("/data/data/com.gtx.jy.custom/p10_stock_rec.img");
-        File file4 = new File("/data/data/com.gtx.jy.custom/recovery_new_keys.img");
-        File file5 = new File("/data/data/com.gtx.jy.custom/reboot_custom.sh");
-        File file6 = new File("/data/data/com.gtx.jy.custom/verify.sh");
-        File file7 = new File("/cache/p10.img");
-        File file8 = new File("/cache/p10_2.img");
-        File file9 = new File("/cache/p10_3.img");
-        File file10 = new File("/cache/p10_verify.img");
-        File file11 = new File("/cache/recovery");
-        File file12 = new File("/data/data/com.gtx.jy.custom/reboot_stock.sh");
-        File file13 = new File("/data/data/com.gtx.jy.custom/openrecoveryscript_stock");
-        File file14 = new File("/data/data/com.gtx.jy.custom/openrecoveryscript_custom");
-        File file15 = new File("/data/data/com.gtx.jy.custom/reboot_twrp.sh");
-
-
-
-        if (file0.exists())
-            file0.delete();
-        if (file1.exists())
-            file1.delete();
-        if (file2.exists())
-            file2.delete();
-        if (file3.exists())
-            file3.delete();
-        if (file4.exists())
-            file4.delete();
-        if (file5.exists())
-            file5.delete();
-        if (file6.exists())
-            file6.delete();
-        if (file7.exists())
-            file7.delete();
-        if (file8.exists())
-            file8.delete();
-        if (file9.exists())
-            file9.delete();
-        if (file10.exists())
-            file10.delete();
-        if (file11.exists())
-            file11.delete();
-        if (file12.exists())
-            file12.delete();
-        if (file13.exists())
-            file13.delete();
-        if (file14.exists())
-            file14.delete();
-        if (file15.exists())
-            file15.delete();
-
-        //future splash
-        // setContentView(R.layout.activity_splash);
-        // Intent intent = new Intent(this, splash.class);
-        //  startActivity(intent);
-
-        //get root on launch
-        try {
-            getRoot();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         setContentView(R.layout.activity_main);
         tv = (TextView) findViewById(R.id.textView1);
         tv2 = (TextView) findViewById(R.id.textView4);
+       // getRoot();
+        delete_stale();
+        extract_files();
+        set_permissions();
+    }
 
-        button1 = (Button) findViewById(R.id.button1);
-        button2 = (Button) findViewById(R.id.button2);
-        button3 = (Button) findViewById(R.id.button3);
-        button4 = (Button) findViewById(R.id.button4);
-        button5 = (Button) findViewById(R.id.button5);
-        button6 = (Button) findViewById(R.id.button6);
-        button7 = (Button) findViewById(R.id.button7);
-        button8 = (Button) findViewById(R.id.button8);
 
+   /* public void getRoot(){
+        try {
+            Process p = getRuntime().exec("su");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }*/
+
+    public void extract_files() {
+        copyFileOrDir("custom.sh");
+        copyFileOrDir("openrecoveryscript_stock");
+    }
+
+    public void set_permissions() {
+        sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/custom.sh");
+    }
+
+    public void delete_stale() {
+        //delete stale files on app launch
+        File file0 = new File("/data/data/com.gtx.jy.custom/custom.sh");
+        File file1 = new File("/data/data/com.gtx.jy.custom/5009_rec_signed.zip");
+        File file2 = new File("/data/data/com.gtx.jy.custom/p10_stock_rec.img");
+        File file3 = new File("/data/data/com.gtx.jy.custom/recovery_new_keys.img");
+        File file4 = new File("/data/data/com.gtx.jy.custom/openrecoveryscript_stock");
+
+        if (file0.exists()) file0.delete();
+        if (file1.exists()) file1.delete();
+        if (file2.exists()) file2.delete();
+        if (file3.exists()) file3.delete();
+        if (file4.exists()) file4.delete();
+    }
+
+
+    public void InstalCustomClick(View arg0) {
+        //install custom recovery
+                tv2.setText(R.string.Verifying_bundled_recovery_file_integrity);
+                tv2.setText(R.string.Installing_Custom_Recovery);
+                sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/custom.sh");
+                copyFileOrDir("recovery_new_keys.img");
+                copyFileOrDir("p10_stock_rec.img");
+                tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/custom.sh install_custom_recovery"));
+    }
+
+    public void VerifyUserClick(View arg0) {
         //Verify which user the app is running as, useful to see if root was successfully granted
-        button1.setOnClickListener(new OnClickListener() {
-            public void onClick(View arg0) {
-                //tv.setText("Output :"+"\n"+runAsRoot());
+        // tv.setText("Output :"+"\n"+runAsRoot());
                 tv2.setText(R.string.Verify_current_user);
                 tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("whoami"));
             }
-        });
 
-        //install custom recovery
-        button2.setOnClickListener(new OnClickListener() {
-            public void onClick(View arg0) {
-                tv2.setText(R.string.Verifying_bundled_recovery_file_integrity);
-                copyFileOrDir("install.sh");
-                copyFileOrDir("p10_stock_rec.img");
-                copyFileOrDir("recovery_new_keys.img");
-                sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/install.sh");
-                tv2.setText(R.string.Installing_Custom_Recovery);
-                tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/install.sh"));
 
-            }
-        });
-
+    public void RestoreStockRecoveryClick(View arg0) {
         //restore stock recovery
-        button3.setOnClickListener(new OnClickListener() {
-            public void onClick(View arg0) {
                 tv2.setText("@string/Verifying_bundled_recovery_file_integrity");
-                copyFileOrDir("restore.sh");
-                copyFileOrDir("p10_stock_rec.img");
-                copyFileOrDir("recovery_new_keys.img");
-                sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/restore.sh");
                 tv2.setText(R.string.Restoring_stock_recovery);
-                tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/restore.sh"));
-            }
-        });
+                sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/custom.sh");
+                copyFileOrDir("recovery_new_keys.img");
+                copyFileOrDir("p10_stock_rec.img");
+                tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/custom.sh restore_stock_recovery"));
 
-        //reboot to custom recovery, if installed, and begin installation of modified STOCK rom
-        button4.setOnClickListener(new OnClickListener() {
-            public void onClick(View arg0) {
-                copyFileOrDir("reboot_stock.sh");
+    }
+
+
+    public void InstallGTXRomClick(View arg0) {
+        //reboot and begin installation of modified STOCK rom
+                Switch dataswitch = findViewById(R.id.switch1);
+                boolean noDataEnabled = dataswitch.isChecked();
+                if(noDataEnabled) {
+                    sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/custom.sh");
+                    tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/custom.sh touch_upgrade"));
+                    //Log.d("CUSTOM:", "ONLY SHOW WHEN TRUE:" + noDataEnabled);
+                }
+                sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/custom.sh");
                 copyFileOrDir("5009_rec_signed.zip");
-                copyFileOrDir("openrecoveryscript_stock");
-                sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/reboot_stock.sh");
-                tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/reboot_stock.sh"));
-            }
-        });
+                tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/custom.sh reboot_custom_gtx"));
+    }
 
-        //verify which recovery is currently installed in the users jy unit
-        button5.setOnClickListener(new OnClickListener() {
-            public void onClick(View arg0) {
-                copyFileOrDir("verify.sh");;
-                tv2.setText(R.string.Verifying_currently_installed_recovery);
-                sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/verify.sh");
-                tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/verify.sh"));
-            }
-        });
+    private Handler mHandler = new Handler();
 
-        //exit program
-        button6.setOnClickListener(new OnClickListener() {
-            public void onClick(View arg0) {
+    public void VerifyRecoveryClick(View arg0) {
+
+
+//verify which recovery is currently installed in the users jy unit
+        tv2.setText(R.string.Verifying_currently_installed_recovery);
+
+
+        sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/custom.sh");
+                copyFileOrDir("recovery_new_keys.img");
+                copyFileOrDir("p10_stock_rec.img");
+                tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/custom.sh verify_custom_recovery"));
+
+
+
+
+
+    }
+
+    public void ExitClick(View arg0) {
+                sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/custom.sh");
                 sudoForResult("rm -rf /cache/recovery");
                 finish();
-            }
-        });
+    }
 
-        //reboot to custom recovery, if installed, and begin installation of modified LBDROID apps rom
-        button7.setOnClickListener(new OnClickListener() {
-            public void onClick(View arg0) {
-                copyFileOrDir("reboot_custom.sh");
-                copyFileOrDir("5009_rec_signed.zip");
-                copyFileOrDir("openrecoveryscript_custom");
-                sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/reboot_custom.sh");
-                tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/reboot_custom.sh"));
-            }
-        });
-
+    public void RebootTWRPClick(View arg0) {
         //reboot to custom recovery, if installed, load into TWRP for system maintenance
-        button8.setOnClickListener(new OnClickListener() {
-            public void onClick(View arg0) {
-                copyFileOrDir("reboot_twrp.sh");
+                sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/custom.sh");
                 copyFileOrDir("5009_rec_signed.zip");
-                sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/reboot_twrp.sh");
-                tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/reboot_twrp.sh"));
-            }
-        });
-
-
-
+                tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/custom.sh reboot_to_twrp"));
     }
 
 
@@ -288,10 +247,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    ///old
-    private void getRoot() throws Exception {
-        // Executes the command.
-        Process p = getRuntime().exec("su");
 
-    }
 }
+
