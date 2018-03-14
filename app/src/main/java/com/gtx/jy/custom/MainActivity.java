@@ -1,32 +1,25 @@
 package com.gtx.jy.custom;
 
-import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-        import android.os.Bundle;
-        import android.os.Handler;
-        import java.io.*;
-
+import android.os.Bundle;
 import android.view.Window;
-import android.widget.*;
-        import static java.lang.Runtime.getRuntime;
-        import android.view.View;
-        import android.widget.Button;
-        import android.view.View.OnClickListener;
-        import android.util.Log;
-        import android.content.res.AssetManager;
-        import java.io.IOException;
-        import java.io.InputStream;
-        import android.content.Context;
-        import java.util.Timer;
-        import java.util.TimerTask;
+import android.view.View;
+import android.util.Log;
+import android.content.res.AssetManager;
+import android.widget.Switch;
+import android.widget.TextView;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView tv, tv2;
-    Button button1, button2, button3, button4, button5, button6, button7, button8;
-    Handler handler;
-    Timer timer=new Timer();//Used for a delay to provide user feedback
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,20 +30,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         tv = (TextView) findViewById(R.id.textView1);
         tv2 = (TextView) findViewById(R.id.textView4);
-       // getRoot();
         delete_stale();
         extract_files();
         set_permissions();
     }
-
-
-   /* public void getRoot(){
-        try {
-            Process p = getRuntime().exec("su");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
 
     public void extract_files() {
         copyFileOrDir("custom.sh");
@@ -76,9 +59,7 @@ public class MainActivity extends AppCompatActivity {
         if (file4.exists()) file4.delete();
     }
 
-
     public void InstalCustomClick(View arg0) {
-        //install custom recovery
                 tv2.setText(R.string.Verifying_bundled_recovery_file_integrity);
                 tv2.setText(R.string.Installing_Custom_Recovery);
                 sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/custom.sh");
@@ -88,27 +69,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void VerifyUserClick(View arg0) {
-        //Verify which user the app is running as, useful to see if root was successfully granted
         // tv.setText("Output :"+"\n"+runAsRoot());
                 tv2.setText(R.string.Verify_current_user);
                 tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("whoami"));
             }
 
-
     public void RestoreStockRecoveryClick(View arg0) {
-        //restore stock recovery
                 tv2.setText("@string/Verifying_bundled_recovery_file_integrity");
                 tv2.setText(R.string.Restoring_stock_recovery);
                 sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/custom.sh");
                 copyFileOrDir("recovery_new_keys.img");
                 copyFileOrDir("p10_stock_rec.img");
                 tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/custom.sh restore_stock_recovery"));
-
     }
 
-
     public void InstallGTXRomClick(View arg0) {
-        //reboot and begin installation of modified STOCK rom
                 Switch dataswitch = findViewById(R.id.switch1);
                 boolean noDataEnabled = dataswitch.isChecked();
                 if(noDataEnabled) {
@@ -121,24 +96,13 @@ public class MainActivity extends AppCompatActivity {
                 tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/custom.sh reboot_custom_gtx"));
     }
 
-    private Handler mHandler = new Handler();
 
     public void VerifyRecoveryClick(View arg0) {
-
-
-//verify which recovery is currently installed in the users jy unit
         tv2.setText(R.string.Verifying_currently_installed_recovery);
-
-
         sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/custom.sh");
                 copyFileOrDir("recovery_new_keys.img");
                 copyFileOrDir("p10_stock_rec.img");
                 tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/custom.sh verify_custom_recovery"));
-
-
-
-
-
     }
 
     public void ExitClick(View arg0) {
@@ -148,14 +112,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void RebootTWRPClick(View arg0) {
-        //reboot to custom recovery, if installed, load into TWRP for system maintenance
                 sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/custom.sh");
                 copyFileOrDir("5009_rec_signed.zip");
                 tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/custom.sh reboot_to_twrp"));
     }
 
-
-    //run commands as superuser
     public static String sudoForResult(String... strings) {
         String res = "";
         DataOutputStream outputStream = null;
@@ -195,9 +156,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return baos.toString("UTF-8");
     }
-
-
-//copy temp files code to /data/data/com.gtx.jy.custom/
 
     private void copyFileOrDir(String path) {
         AssetManager assetManager = this.getAssets();
@@ -246,7 +204,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+   /* public void getRoot(){
+        try {
+            Process p = getRuntime().exec("su");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }*/
 
 }
 

@@ -4,24 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import static java.lang.Runtime.getRuntime;
-
-import android.os.Bundle;
-import android.os.Handler;
-import java.io.*;
-import android.widget.*;
-import static java.lang.Runtime.getRuntime;
-import android.view.View;
-import android.widget.Button;
-import android.view.View.OnClickListener;
+import android.view.Window;
+import android.view.WindowManager;
 import android.util.Log;
-import android.content.res.AssetManager;
-import java.io.IOException;
-import java.io.InputStream;
-import android.content.Context;
-import java.util.Timer;
-import java.util.TimerTask;
-import android.view.*;
+import android.widget.TextView;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
 
 public class splash extends AppCompatActivity {
     private boolean isRootGiven;
@@ -76,12 +65,8 @@ public class splash extends AppCompatActivity {
                 }
         };
 
-
         th.start();
-
     }
-
-
 
 
     public static boolean isRootAvailable(){
