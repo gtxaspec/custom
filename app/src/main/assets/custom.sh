@@ -248,6 +248,8 @@ elif [ "$1" == "reboot_to_twrp" ]; then
 reboot_to_twrp
 elif [ "$1" == "touch_upgrade" ]; then
 touch_upgrade
+elif [ "$1" == "enable_performance_mode" ]; then
+enable_performance_mode
 
 else
 echo "custom.sh"
