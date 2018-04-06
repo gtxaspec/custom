@@ -14,6 +14,8 @@ import java.io.InputStreamReader;
 
 public class splash extends AppCompatActivity {
     private boolean isRootGiven;
+    private boolean debug = true;
+
     TextView tv7;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +49,19 @@ public class splash extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                         finish();
+                    } else if ( debug == true ) {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                        finish();
                     } else {
                             Log.d("CUSTOM:", "root is FALSE");
                         //display text that root must be run
-
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 tv7.setText("You must grant Root Privileges in order to use this program.");
                             }
                         });
-
-
-
                         }
                     }
                 }

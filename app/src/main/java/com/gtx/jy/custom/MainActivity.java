@@ -1,5 +1,6 @@
 package com.gtx.jy.custom;
 
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import android.app.AlertDialog;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -84,7 +86,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void InstallGTXRomClick(View arg0) {
-                Switch dataswitch = findViewById(R.id.switch1);
+
+        recoveryAlertView("Did you make sure to install custom recovery?  Attempting to install the ROM without the custom recovery installed will result in a 'Signature Verification Error' after reboot!");
+/*
+        Switch dataswitch = findViewById(R.id.switch1);
                 boolean noDataEnabled = dataswitch.isChecked();
                 if(noDataEnabled) {
                     sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/custom.sh");
@@ -94,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/custom.sh");
                 copyFileOrDir("5009_rec_signed.zip");
                 tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/custom.sh reboot_custom_gtx"));
+         */
     }
 
 
@@ -115,6 +121,61 @@ public class MainActivity extends AppCompatActivity {
                 sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/custom.sh");
                 copyFileOrDir("5009_rec_signed.zip");
                 tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/custom.sh reboot_to_twrp"));
+    }
+
+    public void performance(View arg0) {
+        tv2.setText("enable performance mode, CAUTION");
+        performanceAlertView("Are you sure you want to enable PERFORMANCE MODE?  This will disable the Intel Thermal Monitor ('ituxd') and will force your CPU to run at MAX SPEED all of the time.  Performance is very good, but make sure you have active cooling to be safe.");
+
+    }
+
+    private void recoveryAlertView( String message ) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Verify Custom Recovery!")
+                //.setIcon(R.drawable.ic_launcher)
+                .setMessage(message)
+
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialoginterface, int i) {
+                    dialoginterface.cancel();
+                    }})
+
+                .setPositiveButton("Install", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialoginterface, int i) {
+
+                        Switch dataswitch = findViewById(R.id.switch1);
+                        boolean noDataEnabled = dataswitch.isChecked();
+                        if(noDataEnabled) {
+                            sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/custom.sh");
+                            tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/custom.sh touch_upgrade"));
+                        }
+                        sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/custom.sh");
+                        copyFileOrDir("5009_rec_signed.zip");
+                        tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/custom.sh reboot_custom_gtx"));
+
+                    }
+                }).show();
+    }
+
+    private void performanceAlertView( String message ) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Enable PERFORMANCE MODE!")
+                //.setIcon(R.drawable.ic_launcher)
+                .setMessage(message)
+
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialoginterface, int i) {
+                        dialoginterface.cancel();
+                    }})
+
+                .setPositiveButton("Enable", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialoginterface, int i) {
+
+                        sudoForResult("chmod 755 /data/data/com.gtx.jy.custom/custom.sh");
+                        tv.setText(R.string.gen_message_Console_Output + "\n" + sudoForResult("/data/data/com.gtx.jy.custom/custom.sh enable_performance_mode"));
+
+                    }
+                }).show();
     }
 
     public static String sudoForResult(String... strings) {

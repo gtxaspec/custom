@@ -208,6 +208,7 @@ silence_amp() {
 i2cset -f -y 4 0x40 0x06 0xff
 i2cset -f -y 4 0x40 0x20 0x00
 echo 1 > /sys/fytver/muteAMP
+echo 1 > /sys/fytver/mute3702
 
 }
 
@@ -227,8 +228,8 @@ mount -o rw,remount /system
 mv /system/priv-app/ituxd/ituxd.apk /system/priv-app/ituxd/ituxd.apk.old
 
 sed -i 's#echo interactive | tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor#echo performance | tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor#g' /system/bin/install-recovery.sh
-sed -i '113s#echo 416000 | tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq;#echo 1200000 | tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq;#g' /system/bin/install-recovery.sh
-sed -i '117s#echo 416000 | tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq;#echo 1040000 | tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq;#g' /system/bin/install-recovery.sh
+sed -i '100s#echo 416000 | tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq#echo 1200000 | tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq#g' /system/bin/install-recovery.sh
+sed -i '105s#echo 416000 | tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq#echo 1040000 | tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq#g' /system/bin/install-recovery.sh
 
 }
 

@@ -10,6 +10,19 @@
 
 
     <Button
+        android:id="@+id/button9"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignStart="@+id/button2"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="10dp"
+        android:onClick="performance"
+        android:text="Performance Mode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Button
         android:id="@+id/button8"
         android:layout_width="195dp"
         android:layout_height="80dp"
@@ -170,6 +183,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="56dp"
+        android:clickable="true"
         android:text="@string/ROM_Utilities"
         android:textColor="@android:color/white"
         android:textSize="20sp"
@@ -215,7 +229,7 @@
         android:layout_height="27dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="26dp"
         android:background="#4c4c4c"
         android:paddingLeft="10dp"
         android:text="Do Not Wipe Data"
@@ -223,7 +237,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView1"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/button9" />
 
 </android.support.constraint.ConstraintLayout>
 
